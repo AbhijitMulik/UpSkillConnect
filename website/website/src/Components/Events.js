@@ -22,7 +22,7 @@ const Events = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>LeetCode-like Coding Platform</h1>
+      <h1 className={styles.title}>Daily Concept Challenge</h1>
 
       <div className={styles.grid}>
         <div className={styles.card}>
