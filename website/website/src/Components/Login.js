@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebase'; // Import your firebase configuration
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import styles from './Login.module.css'; // Import CSS module
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/hackthons'); // Redirect to hackthons page after login
+      navigate('hackthons'); // Redirect to hackthons page after login
     } catch (error) {
       setError("Failed to log in. Please check your credentials.");
       console.error("Login Error:", error);
@@ -21,15 +22,16 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className={styles.loginContainer}>
       <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
+      {error && <p className={styles.errorMessage}>{error}</p>}
+      <form onSubmit={handleLogin} className={styles.loginForm}>
         <input 
           type="email" 
           placeholder="Email" 
           value={email} 
           onChange={(e) => setEmail(e.target.value)} 
+          className={styles.inputField}
           required 
         />
         <input 
@@ -37,9 +39,10 @@ const Login = () => {
           placeholder="Password" 
           value={password} 
           onChange={(e) => setPassword(e.target.value)} 
+          className={styles.inputField}
           required 
         />
-        <button type="submit">Login</button>
+        <button type="submit" className={styles.loginButton}>Login</button>
       </form>
       <p>Don't have an account? <a href="/signup">Sign Up</a></p>
     </div>
